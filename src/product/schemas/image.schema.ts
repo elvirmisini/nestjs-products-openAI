@@ -4,10 +4,13 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 export class ImageData {
   @Prop()
   fileName: string;
+
   @Prop()
   cdnLink?: string;
+  
   @Prop()
   i?: number;
+  
   @Prop()
   alt?: string;
 }

@@ -6,10 +6,13 @@ import { VariantType } from '../enums/variantType.enum';
 export class Option {
   @Prop()
   id: string;
+  
   @Prop()
   name: VariantType;
+  
   @Prop()
   dataField: string;
+  
   @Prop({
     type: [OptionValuesSchema],
   })

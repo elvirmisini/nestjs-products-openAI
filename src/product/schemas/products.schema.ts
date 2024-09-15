@@ -65,21 +65,29 @@ export const ProductDataSchema = SchemaFactory.createForClass(ProductData);
 export class Product {
   @Prop({ unique: true })
   productId: number;
+  
   @Prop()
   docId: string;
+  
   @Prop()
   fullData: string;
+  
   @Prop({ type: ProductDataSchema })
   data: ProductData;
+  
   @Prop({ default: false })
   immutable: boolean;
   deploymentId?: string;
+  
   @Prop({ default: 'item' })
   docType: string;
+  
   @Prop({ default: 'items' })
   namespace: string;
+  
   @Prop()
   companyId?: string;
+  
   @Prop({ default: 'active' })
   soft_delete: string;
 }
