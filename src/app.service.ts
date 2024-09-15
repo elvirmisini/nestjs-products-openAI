@@ -20,8 +20,8 @@ export class AppService {
   @Cron('0 0 * * *')
   handleCron() {
     const results: ProductCsvDto[] = [];
-    // Call provider endpoint
-    console.log('test')
+
+    console.log('Schedule Started')
     createReadStream(join(process.cwd()) + '/src/dump-data/images40.txt')
       .pipe(csv({ separator: '\t' }))
       .on('data', (data: ProductCsvDto) => {
@@ -30,11 +30,11 @@ export class AppService {
       .on('end', async () => {
         console.log('attempting to saved ' + results.length + ' records');
         try {
-          let count = 1;
+          let count = 0;
           for (const data of results) {
             await this.productService.create(data);
             console.log('saved ' + data.ProductID);
-            if (count < 11) {
+            if (count < 10) {
               const { description, success } =
                 await this.openAIService.getNewAIDescription({
                   productDescription: data.ProductDescription,

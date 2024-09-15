@@ -10,7 +10,7 @@ export class OpenAiService {
   constructor() {
     this.model = new ChatOpenAI({
       model: process.env.OPENAI_MODEL,
-      apiKey: process.env.OPENAI_API_KEY,  // Set the API key here
+      apiKey: process.env.OPENAI_API_KEY,  
     });
   }
 
@@ -23,6 +23,7 @@ export class OpenAiService {
     productName: string;
     category: string;
   }): Promise<{ success: boolean; description: string }> {
+
     try {
       const messages = [
         new SystemMessage(`
@@ -39,7 +40,7 @@ export class OpenAiService {
       const parser = new StringOutputParser();
       const result = await this.model.invoke(messages);
       const description = await parser.invoke(result);
-      console.log(description);
+
       return { success: true, description };
     } catch (e) {
        
