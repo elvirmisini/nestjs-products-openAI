@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+  nestjs-products-openai:
+    build: .
+    container_name: 'nestjs-products-openai'
+    restart: always
+    environment:
+      NODE_ENV: 'local'
+      MONGO_DB_URL: 'mongodb://mongodb:27017/...'
+      OPENAI_API_KEY: your-api-key
+      OPENAI_MODEL: model
+      APP_PORT: 3000
+
+    ports:
+      - '3000:3000'
+    depends_on:
+      - mongodb
+    volumes:
+      - .:/src
+    networks:
+      - node-network
+
+  mongodb:
+    image: mongo:6-jammy
+    ports:
+      - '27018:27017'
+    volumes:
+      - dbdata6:/data/db
+    networks:
+      - node-network
+volumes:
+  dbdata6:
+
+networks:
+  node-network:
+    driver: bridge
